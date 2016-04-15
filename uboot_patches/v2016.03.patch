@@ -1,0 +1,23 @@
+diff --git a/include/configs/am335x_evm.h b/include/configs/am335x_evm.h
+index 035c156..db1d682 100644
+--- a/include/configs/am335x_evm.h
++++ b/include/configs/am335x_evm.h
+@@ -477,4 +477,18 @@
+ #endif
+ #endif  /* NOR support */
+ 
++/* Save the env to the binary file on the fat partition. */
++#ifndef CONFIG_SPL_BUILD
++#undef  CONFIG_ENV_IS_NOWHERE
++#undef  CONFIG_ENV_IS_IN_NAND
++#undef  CONFIG_ENV_IS_IN_MMC
++#define CONFIG_ENV_IS_IN_FAT
++#define CONFIG_FAT_WRITE
++#define FAT_ENV_INTERFACE      "mmc"
++#define FAT_ENV_DEVICE_AND_PART        "0"
++#define FAT_ENV_FILE           "uboot.env"
++#define CONFIG_SUPPORT_RAW_INITRD
++#endif
++
++
+ #endif /* ! __CONFIG_AM335X_EVM_H */
